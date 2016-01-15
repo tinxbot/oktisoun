@@ -5,6 +5,9 @@ if msg.text == "[!/]spam" then
 		Fucked by SBSS Team
 			Fucked by SBSS Team
 				Fucked by SBSS Team
+					Fucked by SBSS Team
+						Fucked by SBSS Team
+							Fucked by SBSS Team
 	
 	  ]]
   end
