@@ -55,7 +55,7 @@ local function chat_stats(chat_id)
 
   local text = ''
   for k,user in pairs(users_info) do
-    text = text..user.name..' => '..user.msgs..'\n'
+    text = text..'> '..user.name..' PMs:'..user.msgs..'\n'
   end
 
   return text
@@ -129,7 +129,7 @@ local function bot_stats()
 
   hash = 'chat:*:users'
   r = redis:eval(redis_scan, 1, hash)
-  text = text..'\nChats: '..r
+  text = text..'\nGroups: '..r
 
   return text
 
@@ -139,25 +139,25 @@ local function run(msg, matches)
   if matches[1]:lower() == "stats" then
 
     if not matches[2] then
-      if msg.to.type == 'chat' then
+      if msg.to.type == 'gp' then
         local chat_id = msg.to.id
         return chat_stats(chat_id)
       else
-        return 'Stats works only on chats'
+        return 'Only work in group'
       end
     end
 
     if matches[2] == "bot" then
       if not is_sudo(msg) then
-        return "Bot stats requires privileged user"
+        return "You are NOT SUDO!!"
       else
         return bot_stats()
       end
     end
 
-    if matches[2] == "chat" then
+    if matches[2] == "gp" then
       if not is_sudo(msg) then
-        return "This command requires privileged user"
+        return "You are NOT GLOBAL ADMIN!"
       else
         return chat_stats(matches[3])
       end
@@ -166,16 +166,16 @@ local function run(msg, matches)
 end
 
 return {
-  description = "Plugin to update user stats.", 
+  description = "Robot, Groups and Member Stats", 
   usage = {
-    "!stats: Returns a list of Username [telegram_id]: msg_num",
-    "!stats chat <chat_id>: Show stats for chat_id",
-    "!stats bot: Shows bot stats (sudo users)"
+    "/stats : number of messages stats",
+    "/stats gp (id) : other group stats",
+    "/stats bot : robot stats"
   },
   patterns = {
-    "^!([Ss]tats)$",
-    "^!([Ss]tats) (chat) (%d+)",
-    "^!([Ss]tats) (bot)"
+    "^[!/](stats)$",
+    "^[!/](stats) (gp) (%d+)",
+    "^[!/](stats) (bot)"
     }, 
   run = run,
   pre_process = pre_process
