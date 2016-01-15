@@ -12,7 +12,7 @@ local function save_value(msg, name, value)
   end
   if hash then
     redis:hset(hash, name, value)
-    return "Saved "..name.." => "..value
+    return "Saved "..name
   end
 end
 
@@ -25,11 +25,12 @@ local function run(msg, matches)
 end
 
 return {
-  description = "Plugin for saving values. get.lua plugin is necessary to retrieve them.", 
-  usage = "!set [value_name] [data]: Saves the data with the value_name name.",
+  description = "Save Variables. For View Use /get", 
+  usage = "/set (value) (msg) : saves message in value",
   patterns = {
-   "!set ([^%s]+) (.+)$"
+   "[!/]set ([^%s]+) (.+)$"
   }, 
-  run = run 
+	run = run,
+	moderated = true
 }
 
