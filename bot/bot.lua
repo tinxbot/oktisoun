@@ -237,6 +237,16 @@ function create_config( )
       "member_manager",
       "spammer",
       "txt2img",
+      "anti sticker",
+      "Feedback",
+      "Link Pv",
+      "Pv",
+      "tagall",
+      "block",
+      "Quran",
+      "say_hello",
+      "lock link",
+      "joke",
       "media_handler",
       "moderation"},
     sudo_users = {122774063},
@@ -323,7 +333,7 @@ function cron_plugins()
 end
 
 -- Start and load values
-our_id = 0
+our_id = 122774063
 now = os.time()
 math.randomseed(now)
 started = false
