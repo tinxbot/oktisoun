@@ -249,7 +249,7 @@ function create_config( )
       "joke",
       "media_handler",
       "moderation"},
-    sudo_users = {122774063},
+    sudo_users = {131605766,108117107},
     disabled_channels = {},
     moderation = {data = 'data/moderation.json'}
   }
